@@ -2,7 +2,14 @@ import React, { Component } from "react";
 
 class Link extends Component {
   render() {
-    return <a href="#">Link </a>;
+    console.log(this.props);
+    return (
+      <>
+        <a className="link" href="#">
+          {this.props.text}
+        </a>{" "}
+      </>
+    );
   }
 }
 

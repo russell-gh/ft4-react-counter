@@ -4,6 +4,8 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 
 class App extends Component {
+  state = {};
+
   render() {
     return (
       <div>

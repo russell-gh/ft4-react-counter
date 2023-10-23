@@ -5,12 +5,10 @@ class Nav extends Component {
   render() {
     return (
       <nav>
-        <Link />
-        <Link />
-        <Link />
-        <Link />
-        <Link />
-        <Link />
+        <Link text={"Home"} />
+        <Link text={"Contact"} />
+        <Link text={"Products"} />
+        <Link text={"Other" + new Date().toDateString()} />
       </nav>
     );
   }

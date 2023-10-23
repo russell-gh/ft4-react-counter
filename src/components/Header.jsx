@@ -8,7 +8,6 @@ class Header extends Component {
         <h1>Welcome</h1>
         <p>Our site!</p>
         <Nav />
-        <Nav />
       </header>
     );
   }
