@@ -87,10 +87,15 @@ class App extends Component {
       <>
         <h1>Russells Todos!</h1>
 
-        <label htmlFor="add"></label>
-        <input onInput={this.onAddInput} type="text" id="add" />
-
-        <button onClick={this.onAddClick}>Add</button>
+        {todos.length < 10 ? (
+          <div>
+            <label htmlFor="add"></label>
+            <input onInput={this.onAddInput} type="text" id="add" />
+            <button onClick={this.onAddClick}>Add</button>
+          </div>
+        ) : (
+          <p>You are way too busy!</p>
+        )}
 
         <div>
           <button onClick={this.onSortByDone}>
