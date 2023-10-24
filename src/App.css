@@ -1,11 +1,3 @@
-.completed {
-  background-color: aqua;
-}
-
-.not-completed {
-  background-color: chartreuse;
-}
-
 .lds-spinner {
   color: official;
   display: inline-block;
