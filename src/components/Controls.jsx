@@ -5,7 +5,7 @@ class Controls extends Component {
   render() {
     return (
       <div className="controls">
-        <Button text={"Delete"} />
+        {/* <Button text={"Delete"} /> */}
         <Button text={"Liked"} />
       </div>
     );

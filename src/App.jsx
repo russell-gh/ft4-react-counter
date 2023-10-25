@@ -3,6 +3,7 @@ import axios from "axios";
 import Character from "./components/Character";
 import Spinner from "./components/Spinner";
 import "./App.css";
+import Parent from "./components/Parent";
 
 class App extends Component {
   state = {};
@@ -10,7 +11,7 @@ class App extends Component {
   async componentDidMount() {
     try {
       const { data } = await axios.get(
-        `https://thesimpsonsquoteapi.glitch.me/quotes?count=10`
+        `https://thesimpsonsquoteapi.glitch.me/quotes?count=25`
       );
       this.setState({ simpsons: data });
     } catch (e) {
@@ -32,9 +33,10 @@ class App extends Component {
 
     return (
       <div className="container">
-        {simpsons.map((character) => {
+        <Parent />
+        {/* {simpsons.map((character) => {
           return <Character character={character} />;
-        })}
+        })} */}
       </div>
     );
   }

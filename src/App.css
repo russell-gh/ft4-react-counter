@@ -92,9 +92,9 @@
 }
 
 .character img {
-  width: 100px;
+  width: 90px;
 }
 
-.character .name {
-  font-size: 2rem;
+.character .liked {
+  background-color: #ff0000;
 }
