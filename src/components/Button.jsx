@@ -1,23 +1,15 @@
 import React, { Component } from "react";
 
 class Button extends Component {
-  state = { clicked: false };
-
-  onClick = () => {
-    this.setState({ clicked: !this.state.clicked });
-  };
-
   render() {
-    console.log(this.state);
-    const { text } = this.props;
-    const { clicked } = this.state;
+    const { text, onLikeClick, id, liked } = this.props;
 
     return (
       <button
-        className={clicked ? "liked" : "not-liked"}
-        onClick={this.onClick}
+        className={liked ? "liked" : "not-liked"}
+        onClick={() => onLikeClick(id)}
       >
-        {clicked ? "Already " + text : text}
+        {liked ? "Already " + text : text}
       </button>
     );
   }

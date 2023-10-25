@@ -98,3 +98,7 @@
 .character .liked {
   background-color: #ff0000;
 }
+
+.character .big {
+  width: 125px;
+}
