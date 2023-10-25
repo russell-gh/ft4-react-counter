@@ -3,7 +3,6 @@ import axios from "axios";
 import Character from "./components/Character";
 import Spinner from "./components/Spinner";
 import "./App.css";
-import Parent from "./components/Parent";
 
 class App extends Component {
   state = {};
@@ -33,10 +32,9 @@ class App extends Component {
 
     return (
       <div className="container">
-        <Parent />
-        {/* {simpsons.map((character) => {
+        {simpsons.map((character) => {
           return <Character character={character} />;
-        })} */}
+        })}
       </div>
     );
   }
