@@ -76,3 +76,25 @@
     opacity: 0;
   }
 }
+
+/* my css */
+.container {
+  margin: 20px;
+  background-color: aliceblue;
+}
+
+.character {
+  background-color: darkkhaki;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.character img {
+  width: 100px;
+}
+
+.character .name {
+  font-size: 2rem;
+}
