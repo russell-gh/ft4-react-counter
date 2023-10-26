@@ -5,7 +5,7 @@ class Image extends Component {
     const { image, name } = this.props;
 
     return (
-      <div class="image">
+      <div className="image">
         <img src={image} alt={name} />
       </div>
     );

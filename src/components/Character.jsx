@@ -6,10 +6,9 @@ import Controls from "./Controls";
 
 class Character extends Component {
   render() {
-    const { character, quote, image, characterDirection } =
+    const { character, quote, image, characterDirection, id, liked } =
       this.props.character;
-
-    console.log(characterDirection);
+    const { onLikeClick, onDeleteClick } = this.props;
 
     if (characterDirection === "Left") {
       return (
@@ -17,7 +16,12 @@ class Character extends Component {
           <Name name={character} />
           <Image image={image} />
           <Quote quote={quote} />
-          <Controls />
+          <Controls
+            id={id}
+            liked={liked}
+            onLikeClick={onLikeClick}
+            onDeleteClick={onDeleteClick}
+          />
         </div>
       );
     }
@@ -27,7 +31,12 @@ class Character extends Component {
         <Name name={character} />
         <Quote quote={quote} />
         <Image image={image} />
-        <Controls />
+        <Controls
+          id={id}
+          liked={liked}
+          onLikeClick={onLikeClick}
+          onDeleteClick={onDeleteClick}
+        />
       </div>
     );
   }
