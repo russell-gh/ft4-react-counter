@@ -1,15 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Image extends Component {
-  render() {
-    const { image, name } = this.props;
+const Image = (props) => {
+  const { image, name } = props;
 
-    return (
-      <div className="image">
-        <img src={image} alt={name} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="image">
+      <img src={image} alt={name} />
+    </div>
+  );
+};
 
 export default Image;

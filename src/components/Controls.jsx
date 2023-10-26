@@ -1,23 +1,21 @@
-import React, { Component } from "react";
+import React from "react";
 import Button from "./Button";
 
-class Controls extends Component {
-  render() {
-    const { id, liked, onLikeClick, onDeleteClick, index } = this.props;
+const Controls = (props) => {
+  const { id, liked, onLikeClick, onDeleteClick } = props;
 
-    return (
-      <div className="controls">
-        <Button text={"Delete"} id={id} onClick={onDeleteClick} />
-        <Button
-          text={liked ? "Already liked" : "Like"}
-          className={liked ? "liked" : "not-liked"}
-          id={id}
-          liked={liked}
-          onClick={onLikeClick}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="controls">
+      <Button text={"Delete"} id={id} onClick={onDeleteClick} />
+      <Button
+        text={liked ? "Already liked" : "Like"}
+        className={liked ? "liked" : "not-liked"}
+        id={id}
+        liked={liked}
+        onClick={onLikeClick}
+      />
+    </div>
+  );
+};
 
 export default Controls;

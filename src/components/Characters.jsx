@@ -1,21 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import Character from "./Character";
 
-class Characters extends Component {
-  render() {
-    const { characters, onLikeClick, onDeleteClick } = this.props;
+const Characters = (props) => {
+  const { characters, onLikeClick, onDeleteClick } = props;
 
-    return characters.map((character, index) => {
-      return (
-        <Character
-          key={character.id}
-          character={character}
-          onLikeClick={onLikeClick}
-          onDeleteClick={onDeleteClick}
-        />
-      );
-    });
-  }
-}
+  return characters.map((character, index) => {
+    return (
+      <Character
+        key={character.id}
+        character={character}
+        onLikeClick={onLikeClick}
+        onDeleteClick={onDeleteClick}
+      />
+    );
+  });
+};
 
 export default Characters;

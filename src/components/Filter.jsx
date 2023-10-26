@@ -1,14 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 
-class Filter extends Component {
-  render() {
-    return (
-      <div className="filter">
-        <label htmlFor="filter">Search</label>
-        <input type="text" id="filter" onInput={this.props.onFilterInput} />
-      </div>
-    );
-  }
-}
+const Filter = (props) => {
+  return (
+    <div className="filter">
+      <label htmlFor="filter">Search</label>
+      <input type="text" id="filter" onInput={props.onFilterInput} />
+    </div>
+  );
+};
 
 export default Filter;
