@@ -5,7 +5,7 @@ class Characters extends Component {
   render() {
     const { characters, onLikeClick, onDeleteClick } = this.props;
 
-    return characters.map((character) => {
+    return characters.map((character, index) => {
       return (
         <Character
           key={character.id}
