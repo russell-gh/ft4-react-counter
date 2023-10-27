@@ -1,77 +1,82 @@
 import React, { Component } from "react";
-import axios from "axios";
-import Spinner from "./components/Spinner";
+import { getLocation } from "./utils/location";
 import "./App.css";
-import Interface from "./components/Interface";
+import { OWM_API_KEY, OWM_API_URL } from "./config";
+import axios from "axios";
+import { validate } from "./utils/validation";
 
 class App extends Component {
   state = {};
 
+  //get users location when compontent mounts
   async componentDidMount() {
     try {
-      const { data } = await axios.get(
-        `https://thesimpsonsquoteapi.glitch.me/quotes?count=25`
-      );
+      //get the users location
+      const coords = await getLocation();
 
-      //add a unique
-      //add a liked property
-      data.forEach((element) => {
-        element.id = Math.round(Math.random() * 1000000);
-        element.liked = false;
-      });
+      this.getWeather(coords.latitude, coords.longitude);
 
-      this.setState({ simpsons: data });
+      this.setState({ coords });
     } catch (e) {
-      console.log("Looks like the API is down!");
+      this.setState({ error: true });
     }
   }
 
-  onLikeClick = (id) => {
-    const simpsons = [...this.state.simpsons];
-    const index = simpsons.findIndex((item) => item.id === id);
-    simpsons[index].liked = !simpsons[index].liked;
-    this.setState({ simpsons });
+  //get location when user types
+  onLocationInput = async (e) => {
+    //check if input is valid
+    const errors = await validate("location", { location: e.target.value });
+    if (errors) {
+      this.setState({ locationError: errors.location });
+    } else {
+      this.setState({ locationError: "" });
+    }
+
+    try {
+      const { data } = await axios.get(
+        `${OWM_API_URL}/geo/1.0/direct?q=${e.target.value}&limit=0&appid=37b29f091f8754cf8600dea56dee3863`
+      );
+
+      //if no results, quit early
+      if (data.length === 0) {
+        return;
+      }
+      const { lat, lon } = data[0];
+
+      this.getWeather(lat, lon);
+    } catch (e) {
+      this.setState({ error: true });
+    }
   };
 
-  onDeleteClick = (id) => {
-    const simpsons = [...this.state.simpsons];
-    const index = simpsons.findIndex((item) => item.id === id);
-    simpsons.splice(index, 1);
-    this.setState({ simpsons });
-  };
+  //gets the weather
+  getWeather = async (lat, lon) => {
+    try {
+      const weather = await axios.get(
+        `${OWM_API_URL}/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${OWM_API_KEY}`
+      );
 
-  onSortSelection = (e) => {
-    this.setState({ sort: e.target.value });
-  };
-
-  onFilterInput = (e) => {
-    this.setState({ filter: e.target.value });
+      this.setState({ weather: weather.data });
+    } catch (e) {
+      this.setState({ error: true });
+    }
   };
 
   render() {
-    const { simpsons, sort, filter } = this.state;
+    // console.log(this.state);
 
-    if (!simpsons) {
-      return (
-        <div className="container">
-          <Spinner />
-        </div>
-      );
-    }
-
-    //copy the simpsons
-    const _simpsons = [...simpsons];
+    const { weather } = this.state;
 
     return (
-      <Interface
-        onSortSelection={this.onSortSelection}
-        onLikeClick={this.onLikeClick}
-        onDeleteClick={this.onDeleteClick}
-        characters={_simpsons}
-        sort={sort}
-        filter={filter}
-        onFilterInput={this.onFilterInput}
-      />
+      <>
+        <p>{this.state.error && "An error occured!"}</p>
+        <input type="text" onInput={this.onLocationInput} />
+        <p>{this.state.locationError}</p>
+        {weather &&
+          weather.list.map((item) => {
+            return <p>{item.main.temp}</p>;
+          })}
+      </>
     );
   }
 }
