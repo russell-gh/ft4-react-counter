@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
+import Todo from "./components/Todo";
+import Controls from "./components/Controls";
 
 const App = () => {
   const [todos, setTodos] = useState();
@@ -86,30 +88,16 @@ const App = () => {
     <>
       <h1>Russells Todos!</h1>
 
-      {todos.length < 10 ? (
-        <div>
-          <label htmlFor="add"></label>
-          <input onInput={onAddInput} type="text" id="add" />
-          <button onClick={onAddClick}>Add</button>
-        </div>
-      ) : (
-        <p>You are way too busy!</p>
-      )}
-
-      <div>
-        <button onClick={onSortByDone}>{done ? "Undone" : "Done"}</button>
-      </div>
+      <Controls
+        onAddClick={onAddClick}
+        onSortByDone={onSortByDone}
+        done={done}
+        onAddInput={onAddInput}
+        todos={todos}
+      />
       <ul>
         {todos.map((todo) => {
-          return (
-            <li
-              className={todo.completed ? "completed" : "not-completed"}
-              onClick={() => onToggleCompleted(todo.id)}
-              key={todo.id}
-            >
-              {todo.title}
-            </li>
-          );
+          return <Todo todo={todo} onToggleCompleted={onToggleCompleted} />;
         })}
       </ul>
     </>
