@@ -1,0 +1,2 @@
+export const SET_SIMPSONS = "SET_SIMPSONS";
+export const DELETE_CHARACTER = "DELETE_CHARACTER";

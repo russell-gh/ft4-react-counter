@@ -1,30 +1,33 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import Characters from "./components/Characters";
+import { SET_SIMPSONS } from "./types";
 
 const App = () => {
-  const count = useSelector((state) => state.count);
   const dispatch = useDispatch();
 
-  const add = (num) => {
-    dispatch({ type: "ADD", payload: num });
+  const getAPIData = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://thesimpsonsquoteapi.glitch.me/quotes?count=10`
+      );
+
+      data.forEach((element) => {
+        element.id = Math.random();
+      });
+
+      dispatch({ type: SET_SIMPSONS, payload: data });
+    } catch (e) {
+      console.log("Looks like the API is down!");
+    }
   };
 
-  const minus = () => {
-    dispatch({ type: "MINUS" });
-  };
+  useEffect(() => {
+    getAPIData();
+  }, []);
 
-  const reset = () => {
-    dispatch({ type: "RESET" });
-  };
-
-  return (
-    <>
-      <button onClick={() => add(7)}>Add</button>
-      {count}
-      <button onClick={minus}>Minus</button>
-      <button onClick={reset}>Reset</button>
-    </>
-  );
+  return <Characters />;
 };
 
 export default App;
