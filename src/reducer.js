@@ -1,6 +1,6 @@
-import { DELETE_CHARACTER, SET_SIMPSONS } from "./types";
+import { DELETE_CHARACTER, SET_SEARCH_INPUT, SET_SIMPSONS } from "./types";
 
-const initialState = {};
+const initialState = { search: "" };
 
 export function reducer(state = initialState, action) {
   switch (action.type) {
@@ -18,6 +18,10 @@ export function reducer(state = initialState, action) {
       simpsons.splice(index, 1);
 
       return { ...state, simpsons };
+    }
+
+    case SET_SEARCH_INPUT: {
+      return { ...state, search: action.payload };
     }
 
     default:
