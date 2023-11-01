@@ -1,33 +1,26 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import Characters from "./components/Characters";
-import { SET_SIMPSONS } from "./types";
+import { useDispatch } from "react-redux";
+import { setTodos } from "./features/todo/todoSlice";
+import Interface from "./components/Interface";
+import "./App.css";
 
 const App = () => {
   const dispatch = useDispatch();
 
-  const getAPIData = async () => {
-    try {
-      const { data } = await axios.get(
-        `https://thesimpsonsquoteapi.glitch.me/quotes?count=10`
-      );
-
-      data.forEach((element) => {
-        element.id = Math.random();
-      });
-
-      dispatch({ type: SET_SIMPSONS, payload: data });
-    } catch (e) {
-      console.log("Looks like the API is down!");
-    }
+  const getInitialTodos = async () => {
+    const { data } = await axios.get(
+      `https://jsonplaceholder.typicode.com/todos`
+    );
+    data.length = 7;
+    dispatch(setTodos(data));
   };
 
   useEffect(() => {
-    getAPIData();
+    getInitialTodos();
   }, []);
 
-  return <Characters />;
+  return <Interface />;
 };
 
 export default App;
