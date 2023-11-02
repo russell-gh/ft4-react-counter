@@ -1,26 +1,22 @@
-import React, { useEffect } from "react";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { setTodos } from "./features/todo/todoSlice";
-import Interface from "./components/Interface";
-import "./App.css";
+import React, { useState } from "react";
+import { data } from "./config";
+import DataInput from "./DataInput";
 
 const App = () => {
-  const dispatch = useDispatch();
+  const [state, setState] = useState({});
 
-  const getInitialTodos = async () => {
-    const { data } = await axios.get(
-      `https://jsonplaceholder.typicode.com/todos`
-    );
-    data.length = 7;
-    dispatch(setTodos(data));
+  const onInputCallBack = (e) => {
+    setState({ ...state, [e.target.id]: e.target.value });
   };
 
-  useEffect(() => {
-    getInitialTodos();
-  }, []);
-
-  return <Interface />;
+  console.log(state);
+  return data.map((item) => {
+    return (
+      <div>
+        <DataInput item={item} onInputCallBack={onInputCallBack} />
+      </div>
+    );
+  });
 };
 
 export default App;
