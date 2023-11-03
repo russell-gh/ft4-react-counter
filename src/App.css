@@ -4,6 +4,7 @@
 
 .not-completed {
   background-color: chartreuse;
+  color: red;
 }
 
 .lds-spinner {

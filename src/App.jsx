@@ -6,7 +6,7 @@ import { getTodos } from "./controllers/apiController";
 const App = () => {
   useEffect(() => {
     getTodos();
-  }, []);
+  }, [getTodos2]);
 
   return <Interface />;
 };
