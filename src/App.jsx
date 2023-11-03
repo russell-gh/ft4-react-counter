@@ -10,7 +10,7 @@ class App extends Component {
   async componentDidMount() {
     try {
       const { data } = await axios.get(
-        `https://thesimpsonsquoteapi.glitch.me/quotes?count=25`
+        `https://thesimpsonsquoteapi.glitch.me/quotes?count=50`
       );
 
       //add a unique
